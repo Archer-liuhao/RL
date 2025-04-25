@@ -6,6 +6,7 @@ from stable_baselines3 import DQN
 
 from  replay_buffer import  ReplayBuffer
 from dqn import DQN
+from ac import ActorCritic
 
 EPISODES = 1000
 ACTION_DIM = 4
@@ -21,16 +22,14 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # 创建环境&智能体
 env = gym.make('LunarLander-v3',render_mode=None)
-agent = DQN(action_dim=ACTION_DIM,
+agent = ActorCritic(action_dim=ACTION_DIM,
             state_dim=STATE_DIM,
             learning_rate=LEARNING_RATE,
             discount_rate=DISCOUNT_RATE,
             epsilon=EPSILON,
             batch_size=BATCH_SIZE,
             buffer_capacity=BUFFER_CAPACITY,
-            epsilon_decay=EPSILON_DECAY,
-            target_network_update_freq=TARGET_UPDATE_FREQ,
-            device=DEVICE)
+            )
 
 reward_list = []
 
